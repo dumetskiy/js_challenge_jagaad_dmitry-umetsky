@@ -7,6 +7,7 @@ Vue.use(Vuex);
 const appStore = new Vuex.Store({
   state: {
     listingItems: [],
+    resultsCount: 0,
     page: 1,
     wishlistedCollection: {items:{}},
     cartCollection: {items:{}},

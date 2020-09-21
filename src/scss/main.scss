@@ -114,6 +114,17 @@ main {
   justify-content: center;
   align-items: center;
   color: $color-primary-gray;
+  cursor: pointer;
+}
+
+.pagination__link.current {
+  @include font-lato-bold;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.pagination__link.break {
+  pointer-events: none;
 }
 
 .pagination__link:hover {

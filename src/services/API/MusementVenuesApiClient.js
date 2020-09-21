@@ -3,7 +3,7 @@ import appStore from "../vuex/store";
 
 export default class MusementVenuesApiClient extends BaseApiClient {
   getBaseUrl() {
-    return 'https://api.musement.com/api/v3/venues/164/activities'
+    return 'https://api.musement.com/api/v3/activities'
   }
   getDefaultItemsPerPage() {
     return 6;
@@ -16,7 +16,10 @@ export default class MusementVenuesApiClient extends BaseApiClient {
       offset: (page - 1) * limit,
       limit: limit
     })).then(
-      response => (appStore.state.listingItems = response.data)
+      response => {
+        appStore.state.listingItems = response.data.data;
+        appStore.state.resultsCount = response.data.meta.count;
+      }
     ).catch(
       error => console.error(error)
     );
