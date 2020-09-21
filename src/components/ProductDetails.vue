@@ -1,39 +1,61 @@
 <template>
   <li class="product-list__item">
-    <article class="product" itemscope itemtype="http://schema.org/Product">
+    <article class="product">
       <figure class="product__image-wrapper">
-        <img class="product__image" :src="coverImage" alt="Product" itemprop="image"/>
+        <img
+          class="product__image"
+          :src="coverImage"
+          alt="Product"
+          itemprop="image"
+        >
         <button
-          v-on:click="toggleIsWishlisted"
           class="product__wishlist-button button button--round button--wishlist"
           :class="{ 'selected' : productIsWishlisted}"
+          @click="toggleIsWishlisted"
         >
-          <wishlist-icon></wishlist-icon>
+          <wishlist-icon />
         </button>
       </figure>
       <div class="product__details">
-        <h1 class="product__title" itemprop="brand">{{ title }}</h1>
-        <p class="product__subtitle" itemprop="description">{{ description }}</p>
-        <div class="product__price" itemscope itemtype="http://schema.org/Offer">
-          <span class="product__price" itemprop="price">{{ prettyPrice }}</span>
+        <h1
+          class="product__title"
+          itemprop="brand"
+        >
+          {{ title }}
+        </h1>
+        <p
+          class="product__subtitle"
+          itemprop="description"
+        >
+          {{ description }}
+        </p>
+        <div class="product__price">
+          <span
+            class="product__price"
+            itemprop="price"
+          >{{ prettyPrice }}</span>
         </div>
         <button
-          v-if="productIsCarted"
-          v-on:click="toggleIsInCart"
+          v-if="productIsInCart"
           class="product__add-to-cart button button--primary button--in-cart"
-        >In Cart</button>
+          @click="toggleIsInCart"
+        >
+          In Cart
+        </button>
         <button
           v-else
-          v-on:click="toggleIsInCart"
           class="product__add-to-cart button button--primary"
-        >Add to cart</button>
+          @click="toggleIsInCart"
+        >
+          Add to cart
+        </button>
       </div>
     </article>
   </li>
 </template>
 <script>
 import WishlistIcon from '../../static/svg/wishlist.svg';
-import ProductCollectionItem from "../data/ProductCollectionItem";
+import ProductCollectionItem from "../data-class/ProductCollectionItem";
 
 export default {
   name: 'ProductDetails',
@@ -41,34 +63,58 @@ export default {
     'wishlist-icon': WishlistIcon,
   },
   props: {
-    title: String,
-    description: String,
-    prettyPrice: String,
-    priceValue: Number,
-    uuid: String,
-    coverImage: String,
+    title: {
+      type: String,
+      default: '',
+      required: true,
+    },
+    description: {
+      type: String,
+      default: '',
+      required: false,
+    },
+    prettyPrice: {
+      type: String,
+      default: '',
+      required: true,
+    },
+    uuid: {
+      type: String,
+      default: '',
+      required: true,
+    },
+    coverImage: {
+      type: String,
+      default: '',
+      required: true,
+    },
+    priceValue: {
+      type: Number,
+      default: 0,
+      required: true,
+    }
   },
   computed: {
     productIsWishlisted() {
-      return this.productIsInCollection(this.$store.state.wishlistedCollection);
+      return this.productIsInCollection('wishlistedCollection');
     },
-    productIsCarted() {
-      return this.productIsInCollection(this.$store.state.cartCollection);
+    productIsInCart() {
+      return this.productIsInCollection('cartCollection');
     },
   },
   methods: {
-    productIsInCollection(collection) {
-      return this.$store.getters.productIsInCollection(this.$props.uuid, collection);
+    productIsInCollection(collectionName) {
+      return this.$store.getters.productIsInCollection(this.$props.uuid, collectionName);
     },
     toggleIsWishlisted() {
-      this.toggleIsInCollection(this.$store.state.wishlistedCollection)
+      this.toggleIsInCollection('wishlistedCollection')
     },
     toggleIsInCart() {
-      this.toggleIsInCollection(this.$store.state.cartCollection)
+      this.toggleIsInCollection('cartCollection')
     },
-    toggleIsInCollection(collection) {
-      if (this.productIsInCollection(collection)) {
-        return this.$store.commit('removeCollectionItem', {collection: collection, uuid: this.$props.uuid});
+    toggleIsInCollection(collectionName) {
+      if (this.productIsInCollection(collectionName)) {
+        return this.$store.commit('removeCollectionItem', {collectionName: collectionName, uuid: this.$props.uuid});
       }
 
       let collectionItem = new ProductCollectionItem(
@@ -76,15 +122,10 @@ export default {
       );
 
       return this.$store.commit('addCollectionItem', {
-        collection: collection,
+        collectionName: collectionName,
         uuid: this.$props.uuid,
         collectionItem: collectionItem
       });
-    }
-  },
-  data () {
-    return {
-      products: []
     }
   },
 }

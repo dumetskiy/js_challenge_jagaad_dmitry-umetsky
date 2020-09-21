@@ -17,8 +17,19 @@
 @mixin flex($size: 1, $h-alignment: flex-start, $v-alignment: flex-start, $self-align: auto, $flow: row nowrap) {
   align-content: $h-alignment;
   align-self: $self-align;
-  display: flex;
   flex: $size;
   flex-flow: $flow;
   justify-content: $v-alignment;
+}
+
+@mixin mobile {
+  @media all and (max-width: #{$mobileWidthLimit}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media all and (max-width: #{$tabletWidthLimit}) and  (min-width: #{$mobileWidthLimit + 1px})  {
+    @content;
+  }
 }

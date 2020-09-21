@@ -1,17 +1,52 @@
 <template>
   <header class="header container">
-    <h1 class="page-title">{{ title }}</h1>
+    <h1 class="page-title">
+      {{ title }}
+    </h1>
     <aside class="header-bag">
+      <div class="product-collection">
+        <div class="product-collection__title">
+          Wishlist
+          <span class="product-collection__title__subtitle">[10 items]</span>
+        </div>
+        <div class="product-collection__items-holder">
+          <div class="product-collection__items-holder__item">
+            <div class="item-section__preview">
+              <img class="item-section__preview__image" src="https://images.musement.com/cover/0095/61/thumb_9460276_cover_header.jpeg?w=540">
+            </div>
+            <div class="item-section__details">
+              <div class="item-section__details__title">
+                Vista sul litorale e tour di gruppo di Monte Carlo da Nizza
+              </div>
+              <div class="item-section__details__price">
+                $ 50.00
+              </div>
+              <div class="item-section__details__action-link">
+                remove
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="header-bag__item header-bag__count">
-        <div v-if="cartItemsValue > 0" class="header-bag__price">
+        <div
+          v-if="cartItemsValue > 0"
+          class="header-bag__price"
+        >
           {{ cartItemsFriendlyValue }}
         </div>
-        <WishlistIcon></WishlistIcon>
-        <span v-if="wishlistedItemsCount > 0" class="bag__item-counter">{{ wishlistedItemsCount }}</span>
+        <wishlist-icon />
+        <span
+          v-if="wishlistItemsCount > 0"
+          class="bag__item-counter"
+        >{{ wishlistItemsCount }}</span>
       </div>
       <div class="header-bag__item header-bag__wishlist-count">
-        <BagIcon></BagIcon>
-        <span v-if="cartItemsCount > 0" class="bag__item-counter">{{ cartItemsCount }}</span>
+        <bag-icon />
+        <span
+          v-if="cartItemsCount > 0"
+          class="bag__item-counter"
+        >{{ cartItemsCount }}</span>
       </div>
     </aside>
   </header>
@@ -23,32 +58,32 @@ import currencyFormatter from "../services/Formatter/CurrencyFormatter";
 
 export default {
   name: 'AppHeader',
+  components: {
+    'wishlist-icon': WishlistIcon,
+    'bag-icon': BagIcon
+  },
   data () {
     return {
       title: 'Wishlist catalog'
     }
   },
-  components: {
-    WishlistIcon,
-    BagIcon
-  },
   computed: {
-    wishlistedItemsCount () {
-      return this.$store.getters.collectionItemsCount(this.$store.state.wishlistedCollection);
-    },
     cartItemsValue () {
-      return this.getCollectionItemsValue(this.$store.state.cartCollection);
+      return this.getCollectionItemsValue('cartCollection');
     },
     cartItemsFriendlyValue () {
-      return this.formatMoneyValue(this.getCollectionItemsValue(this.$store.state.cartCollection));
+      return this.formatMoneyValue(this.getCollectionItemsValue('cartCollection'));
     },
     cartItemsCount () {
-      return this.$store.getters.collectionItemsCount(this.$store.state.cartCollection);
+      return this.$store.getters.collectionItemsCount('cartCollection');
+    },
+    wishlistItemsCount () {
+      return this.$store.getters.collectionItemsCount('wishlistedCollection');
     },
   },
   methods: {
-    getCollectionItemsValue (collection) {
-      return this.$store.getters.collectionTotalPrice(collection);
+    getCollectionItemsValue (collectionName) {
+      return this.$store.getters.collectionTotalPrice(collectionName);
     },
     formatMoneyValue(value) {
       return currencyFormatter.formatCurrency(value);

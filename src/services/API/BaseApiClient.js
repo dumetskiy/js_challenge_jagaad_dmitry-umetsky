@@ -1,22 +1,24 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default class BaseApiClient {
   constructor() {
     this.axios = axios.create({
-      baseURL: this.getBaseUrl(),
-      timeout: this.getTimeout(),
+      baseURL: this.constructor.getBaseUrl(),
+      timeout: this.constructor.getTimeout(),
       headers: {
         'Content-Type': 'application/json',
         'accept-language': 'it',
         'x-musement-currency': 'EUR',
         'x-musement-version': '3.4.0',
-      }
+      },
     });
   }
-  getTimeout() {
+
+  static getTimeout() {
     return 5000;
   }
-  getQueryString(queryParams) {
-    return '?' + new URLSearchParams(queryParams).toString();
+
+  static getQueryString(queryParams) {
+    return `?${new URLSearchParams(queryParams).toString()}`;
   }
 }

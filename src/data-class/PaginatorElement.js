@@ -13,4 +13,6 @@ class BreakElement extends PaginatorElement {}
 
 class PageElement extends PaginatorElement {}
 
-export {PreviousPageElement, NextPageElement, BreakElement, PageElement};
+export {
+  PreviousPageElement, NextPageElement, BreakElement, PageElement,
+};

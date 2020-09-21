@@ -1,7 +1,7 @@
 <template>
   <div>
-    <AppHeader></AppHeader>
-    <AppContainer></AppContainer>
+    <app-header />
+    <app-container />
   </div>
 </template>
 
@@ -10,8 +10,11 @@ import AppHeader from "./components/AppHeader";
 import AppContainer from "./components/AppContainer";
 
 export default {
-  name: 'app',
-  components: {AppContainer, AppHeader},
+  name: 'App',
+  components: {
+    'app-container': AppContainer,
+    'app-header': AppHeader,
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

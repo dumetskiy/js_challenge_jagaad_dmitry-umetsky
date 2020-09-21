@@ -3,31 +3,34 @@
     <ul class="pagination__list">
       <li
         v-for="(paginationElement, elementId) in paginationConfig"
-        v-bind:key="elementId"
+        :key="elementId"
         class="pagination__item"
       >
         <p
           v-if="isPreviousPagePaginationElement(paginationElement)"
-          v-on:click="previousPage()"
           class="pagination__link"
+          @click="previousPage()"
         >
-          <ArrowLeft></ArrowLeft>
+          <arrow-left-icon />
         </p>
         <p
           v-else-if="isNextPagePaginationElement(paginationElement)"
-          v-on:click="nextPage()"
           class="pagination__link"
+          @click="nextPage()"
         >
-          <ArrowRight></ArrowRight>
+          <arrow-right-icon />
         </p>
-        <p v-else-if="isBreakPaginationElement(paginationElement)" class="pagination__link break">
+        <p
+          v-else-if="isBreakPaginationElement(paginationElement)"
+          class="pagination__link break"
+        >
           ...
         </p>
         <p
           v-else-if="isPagePaginationElement(paginationElement)"
-          v-on:click="switchPage(paginationElement.page)"
           class="pagination__link"
           :class="{ 'current' : paginationElement.isCurrentPage}"
+          @click="switchPage(paginationElement.page)"
         >
           {{ paginationElement.page }}
         </p>
@@ -40,13 +43,13 @@ import PaginationConfigGenerator from "../services/Helper/PaginationConfigGenera
 import ArrowLeft from '../../static/svg/arrow-left.svg';
 import ArrowRight from '../../static/svg/arrow-right.svg';
 import MusementVenuesApiClient from "../services/API/MusementVenuesApiClient";
-import {BreakElement, NextPageElement, PageElement, PreviousPageElement} from "../services/Helper/PaginatorElement";
+import {BreakElement, NextPageElement, PageElement, PreviousPageElement} from "../data-class/PaginatorElement";
 
 export default {
-  name: 'Pagination',
+  name: 'AppPagination',
   components: {
-    ArrowLeft,
-    ArrowRight
+    'arrow-left-icon': ArrowLeft,
+    'arrow-right-icon': ArrowRight
   },
   computed: {
     paginationConfig () {
@@ -56,6 +59,9 @@ export default {
         this.$store.state.resultsCount
       )
     }
+  },
+  mounted() {
+    this.fetchPaginatedProducts();
   },
   methods: {
     fetchPaginatedProducts() {
@@ -89,12 +95,6 @@ export default {
     isPagePaginationElement(element) {
       return element instanceof PageElement;
     },
-  },
-  mounted() {
-    this.fetchPaginatedProducts();
-  },
-  data () {
-    return {}
   }
 }
 </script>

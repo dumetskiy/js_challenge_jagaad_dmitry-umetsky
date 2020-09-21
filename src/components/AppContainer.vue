@@ -4,34 +4,28 @@
       <ul class="product-list">
         <product-details
           v-for="item in items"
-          v-bind:title=item.title
-          v-bind:description=item.description
-          v-bind:priceValue=item.original_retail_price.value
-          v-bind:prettyPrice=item.original_retail_price.formatted_value
-          v-bind:coverImage=item.cover_image_url
-          v-bind:uuid=item.uuid
-          v-bind:key=item.uuid
-        ></product-details>
+          :key="item.uuid"
+          :title="item.title"
+          :description="item.description"
+          :price-value="item.original_retail_price.value"
+          :pretty-price="item.original_retail_price.formatted_value"
+          :cover-image="item.cover_image_url"
+          :uuid="item.uuid"
+        />
       </ul>
-      <app-pagination></app-pagination>
+      <app-pagination />
     </div>
   </main>
 </template>
 <script>
-import MusementVenuesApiClient from "../services/API/MusementVenuesApiClient";
 import ProductDetails from "./ProductDetails";
-import Pagination from "./Pagination";
+import AppPagination from "./AppPagination";
 
 export default {
   name: 'AppContainer',
   components: {
     'product-details': ProductDetails,
-    'app-pagination': Pagination,
-  },
-  data () {
-    return {
-      products: []
-    }
+    'app-pagination': AppPagination,
   },
   computed: {
     items () {

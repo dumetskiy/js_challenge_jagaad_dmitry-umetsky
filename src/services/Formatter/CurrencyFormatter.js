@@ -1,12 +1,13 @@
-let currencyFormatter = new class CurrencyFormatter {
+const currencyFormatter = new class CurrencyFormatter {
   formatCurrency(value, currency) {
-    currency = currency || this.getDefaultCurrency();
+    currency = currency || this.constructor.getDefaultCurrency();
 
-    return currency + ' ' + value.toFixed(2);
+    return `${currency} ${value.toFixed(2)}`;
   }
-  getDefaultCurrency() {
+
+  static getDefaultCurrency() {
     return '€';
   }
-}
+}();
 
 export default currencyFormatter;
