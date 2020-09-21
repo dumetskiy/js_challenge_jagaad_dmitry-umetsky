@@ -68,14 +68,14 @@ export default {
     },
     toggleIsInCollection(collection) {
       if (this.productIsInCollection(collection)) {
-        return this.$store.commit('removeItem', {collection: collection, uuid: this.$props.uuid});
+        return this.$store.commit('removeCollectionItem', {collection: collection, uuid: this.$props.uuid});
       }
 
       let collectionItem = new ProductCollectionItem(
         this.$props.uuid, this.$props.title, this.$props.priceValue, this.$props.prettyPrice
       );
 
-      return this.$store.commit('addItem', {
+      return this.$store.commit('addCollectionItem', {
         collection: collection,
         uuid: this.$props.uuid,
         collectionItem: collectionItem

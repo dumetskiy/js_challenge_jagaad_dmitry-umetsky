@@ -13,14 +13,14 @@ const appStore = new Vuex.Store({
     cartCollection: {items:{}},
   },
   mutations: {
-    addItem(state, payload) {
+    addCollectionItem(state, payload) {
       if (!payload.item instanceof ProductCollectionItem) {
         return;
       }
 
       payload.collection.items = {...payload.collection.items, [payload.uuid]: payload.collectionItem};
     },
-    removeItem(state, payload) {
+    removeCollectionItem(state, payload) {
       Vue.delete(payload.collection.items, payload.uuid);
     },
   },
