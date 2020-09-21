@@ -1,0 +1,60 @@
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: $color-creamy;
+  transition: .3s fill;
+}
+
+.button {
+  border: 1px solid $color-creamy;
+  border-radius: 100px;
+  background-color: $color-white;
+  cursor: pointer;
+  transition: .3s border, .3s color, .3s background-color;
+
+  &--round
+  {
+    display: block;
+    border-radius: 50%;
+  }
+
+  &--primary
+  {
+    @include font-lato-bold;
+    padding: 13px;
+    font-size: $fontSize-medium;
+    text-transform: uppercase;
+    letter-spacing: 1.39px;
+
+    &:hover
+    {
+      border: 1px solid $color-primary-gray;
+      color: $color-white;
+      background-color: $color-primary-gray;
+    }
+  }
+
+  &--wishlist
+  {
+    > .icon
+    {
+      fill: $color-creamy;
+    }
+
+    &:hover,
+    &.selected
+    {
+      border: 1px solid $color-primary-gray;
+
+      & > .icon
+      {
+        fill: $color-primary-gray;
+      }
+    }
+  }
+
+  &--in-cart {
+    background-color: $color-creamy;
+  }
+}

@@ -61,7 +61,14 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.svg$/,
+        use: [
+          'babel-loader',
+          'vue-svg-loader',
+        ],
+      },
+      {
+        test: /\.(png|jpg|gif|ttf)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'

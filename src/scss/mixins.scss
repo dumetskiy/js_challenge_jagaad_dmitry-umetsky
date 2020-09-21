@@ -1,0 +1,24 @@
+@mixin font-lato-regular {
+  font-family: 'Lato-Regular', sans-serif;
+}
+
+@mixin font-lato-bold {
+  font-family: 'Lato-Bold', sans-serif;
+}
+
+@mixin font-lato-bolditalic {
+  font-family: 'Lato-BoldItalic', sans-serif;
+}
+
+@mixin font-lato-italic {
+  font-family: 'Lato-Italic', sans-serif;
+}
+
+@mixin flex($size: 1, $h-alignment: flex-start, $v-alignment: flex-start, $self-align: auto, $flow: row nowrap) {
+  display: flex;
+  flex-flow: $flow;
+  flex: $size;
+  align-content: $h-alignment;
+  justify-content: $v-alignment;
+  align-self: $self-align;
+}
