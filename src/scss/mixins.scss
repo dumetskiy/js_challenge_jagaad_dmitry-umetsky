@@ -15,10 +15,10 @@
 }
 
 @mixin flex($size: 1, $h-alignment: flex-start, $v-alignment: flex-start, $self-align: auto, $flow: row nowrap) {
-  display: flex;
-  flex-flow: $flow;
-  flex: $size;
   align-content: $h-alignment;
-  justify-content: $v-alignment;
   align-self: $self-align;
+  display: flex;
+  flex: $size;
+  flex-flow: $flow;
+  justify-content: $v-alignment;
 }

@@ -5,17 +5,17 @@
   margin: 0 -10px;
 
   &__item {
-    padding: 10px;
     flex: 1 0 33.3333%;
     max-width: 33.3333%;
+    padding: 10px;
   }
 }
 
 .product {
+  background-color: $color-white;
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: $color-white;
 
   &__image-wrapper {
     padding: 20px;
@@ -24,8 +24,8 @@
   }
 
   &__image {
-    max-width: 100%;
     height: auto;
+    max-width: 100%;
   }
 
   &__details {
@@ -38,25 +38,25 @@
 
   &__title {
     @include font-lato-bold;
-    padding-bottom: 10px;
     font-size: $fontSize-primary;
     letter-spacing: 1.37px;
+    padding-bottom: 10px;
     text-transform: uppercase;
   }
 
   &__subtitle {
-    padding-bottom: 10px;
-    font-size: $fontSize-small;
-    line-height: 19px;
-    letter-spacing: 0.43px;
     color: $color-light-gray;
+    font-size: $fontSize-small;
+    letter-spacing: 0.43px;
+    line-height: 19px;
+    padding-bottom: 10px;
   }
 
   &__price {
     @include font-lato-bold;
-    padding-bottom: 20px;
     font-size: $fontSize-primary;
     letter-spacing: 2.33px;
+    padding-bottom: 20px;
 
     &--strike {
       margin-right: 10px;
@@ -68,21 +68,20 @@
     }
   }
 
-  &__wishlist-button
-  {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
+  &__wishlist-button {
     align-items: center;
+    display: flex;
+    height: 35px;
+    justify-content: center;
     position: absolute;
-    top: 10px;
     right: 10px;
+    top: 10px;
+    width: 35px;
   }
 
   &__add-to-cart {
-    width: 100%;
     margin-top: 10px;
     margin-top: auto;
+    width: 100%;
   }
 }

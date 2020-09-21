@@ -10,6 +10,7 @@
           v-bind:prettyPrice=item.original_retail_price.formatted_value
           v-bind:coverImage=item.cover_image_url
           v-bind:uuid=item.uuid
+          v-bind:key=item.uuid
         ></product-details>
       </ul>
       <app-pagination></app-pagination>

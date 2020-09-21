@@ -23,6 +23,12 @@ const appStore = new Vuex.Store({
     removeCollectionItem(state, payload) {
       Vue.delete(payload.collection.items, payload.uuid);
     },
+    nextPage(state) {
+      state.page++;
+    },
+    previousPage(state) {
+      state.page--;
+    },
   },
   getters: {
     collectionTotalPrice: state => collection => {

@@ -1,54 +1,46 @@
-
 .icon {
-  width: 20px;
-  height: 20px;
   fill: $color-creamy;
-  transition: .3s fill;
+  height: 20px;
+  transition: 0.3s fill;
+  width: 20px;
 }
 
 .button {
+  background-color: $color-white;
   border: 1px solid $color-creamy;
   border-radius: 100px;
-  background-color: $color-white;
   cursor: pointer;
-  transition: .3s border, .3s color, .3s background-color;
+  transition: 0.3s border, 0.3s color, 0.3s background-color;
 
-  &--round
-  {
-    display: block;
+  &--round {
     border-radius: 50%;
+    display: block;
   }
 
-  &--primary
-  {
+  &--primary {
     @include font-lato-bold;
-    padding: 13px;
     font-size: $fontSize-medium;
-    text-transform: uppercase;
     letter-spacing: 1.39px;
+    padding: 13px;
+    text-transform: uppercase;
 
-    &:hover
-    {
+    &:hover {
+      background-color: $color-primary-gray;
       border: 1px solid $color-primary-gray;
       color: $color-white;
-      background-color: $color-primary-gray;
     }
   }
 
-  &--wishlist
-  {
-    > .icon
-    {
+  &--wishlist {
+    > .icon {
       fill: $color-creamy;
     }
 
     &:hover,
-    &.selected
-    {
+    &.selected {
       border: 1px solid $color-primary-gray;
 
-      & > .icon
-      {
+      & > .icon {
         fill: $color-primary-gray;
       }
     }

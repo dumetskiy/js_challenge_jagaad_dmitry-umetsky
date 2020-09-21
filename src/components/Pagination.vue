@@ -1,11 +1,23 @@
 <template>
   <nav class="pagination">
     <ul class="pagination__list">
-      <li v-for="paginationElement in paginationConfig" class="pagination__item">
-        <p v-if="isPreviousPagePaginationElement(paginationElement)" class="pagination__link">
+      <li
+        v-for="(paginationElement, elementId) in paginationConfig"
+        v-bind:key="elementId"
+        class="pagination__item"
+      >
+        <p
+          v-if="isPreviousPagePaginationElement(paginationElement)"
+          v-on:click="previousPage()"
+          class="pagination__link"
+        >
           <ArrowLeft></ArrowLeft>
         </p>
-        <p v-else-if="isNextPagePaginationElement(paginationElement)" class="pagination__link">
+        <p
+          v-else-if="isNextPagePaginationElement(paginationElement)"
+          v-on:click="nextPage()"
+          class="pagination__link"
+        >
           <ArrowRight></ArrowRight>
         </p>
         <p v-else-if="isBreakPaginationElement(paginationElement)" class="pagination__link break">
@@ -55,6 +67,14 @@ export default {
       }
 
       this.$store.state.page = page;
+      this.fetchPaginatedProducts();
+    },
+    nextPage() {
+      this.$store.commit('nextPage');
+      this.fetchPaginatedProducts();
+    },
+    previousPage() {
+      this.$store.commit('previousPage');
       this.fetchPaginatedProducts();
     },
     isPreviousPagePaginationElement(element) {

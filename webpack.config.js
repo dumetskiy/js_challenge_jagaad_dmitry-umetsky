@@ -1,6 +1,5 @@
 var path = require('path')
 var webpack = require('webpack')
-const SassLintPlugin = require('sass-lint-webpack')
 
 module.exports = {
   entry: './src/main.js',
@@ -11,6 +10,12 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      },
       {
         test: /\.css$/,
         use: [
@@ -91,9 +96,6 @@ module.exports = {
   performance: {
     hints: false
   },
-  plugins: [
-    new SassLintPlugin(),
-  ],
   devtool: '#eval-source-map'
 }
 
