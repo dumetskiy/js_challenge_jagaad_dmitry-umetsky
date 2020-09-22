@@ -18,6 +18,7 @@
       >
         <div class="item-section__preview">
           <img
+            alt="{{ product.title }}"
             class="item-section__preview__image"
             :src="product.imageUrl"
           >
