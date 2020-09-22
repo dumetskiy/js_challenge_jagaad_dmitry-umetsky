@@ -35,6 +35,9 @@ const appStore = new Vuex.Store({
     previousPage(state) {
       state.page--;
     },
+    closeListViewCollection(state) {
+      return Vue.set(state.collectionList, 'active', false);
+    },
     toggleListViewCollection(state, collectionName) {
 
       if (state.collectionList.selectedCollection === collectionName) {

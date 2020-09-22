@@ -3,6 +3,10 @@
     v-if="isActive"
     class="product-collection"
   >
+    <close-icon
+      class="product-collection__close-icon"
+      @click="closeListViewCollection"
+    />
     <div class="product-collection__title">
       {{ selectedCollection.title }}
     </div>
@@ -37,9 +41,13 @@
   </div>
 </template>
 <script>
+import Close from '../../static/svg/close.svg';
 
 export default {
   name: 'ProductCollectionList',
+  components: {
+    'close-icon': Close
+  },
   computed: {
     selectedCollection () {
       return this.$store.getters.selectedListViewCollection;
@@ -57,6 +65,9 @@ export default {
         uuid: uuid,
         collectionName: collectionName
       });
+    },
+    closeListViewCollection() {
+      this.$store.commit('closeListViewCollection');
     }
   }
 }
