@@ -1,19 +1,20 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import ProductCollectionItem from '../../data-class/ProductCollectionItem';
+import ProductCollection from "../../data-class/ProductCollection";
 
 Vue.use(Vuex);
 
 const appStore = new Vuex.Store({
   state: {
-    listingItems: [],
-    resultsCount: 0,
-    page: 1,
-    wishlistedCollection: { items: {}, title: 'Wishlist' },
-    cartCollection: { items: {}, title: 'Cart' },
+    listingItems: [], // Currently listed on the page products data
+    resultsCount: 0, // Total results count
+    page: 1, // Current page
+    wishlistCollection: new ProductCollection('Wishlist'), // ProductCollection storing wishlist products data
+    cartCollection: new ProductCollection('Cart'), // ProductCollection storing cart products data
     collectionList: {
-      active: false,
-      selectedCollection: null
+      active: false, // Flag indicating if the collection list view should be displayed
+      selectedCollection: null // The name of collection currently listed in collection list view
     }
   },
   mutations: {

@@ -96,7 +96,7 @@ export default {
   },
   computed: {
     productIsWishlisted() {
-      return this.productIsInCollection('wishlistedCollection');
+      return this.productIsInCollection('wishlistCollection');
     },
     productIsInCart() {
       return this.productIsInCollection('cartCollection');
@@ -107,7 +107,7 @@ export default {
       return this.$store.getters.productIsInCollection(this.$props.uuid, collectionName);
     },
     toggleIsWishlisted() {
-      this.toggleIsInCollection('wishlistedCollection')
+      this.toggleIsInCollection('wishlistCollection')
     },
     toggleIsInCart() {
       this.toggleIsInCollection('cartCollection')

@@ -14,11 +14,6 @@ export default {
   components: {
     'app-container': AppContainer,
     'app-header': AppHeader,
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
   }
 }
 </script>

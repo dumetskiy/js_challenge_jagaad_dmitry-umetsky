@@ -1,16 +1,12 @@
 import axios from 'axios';
 
 export default class BaseApiClient {
+  // Configuring base axios API client
   constructor() {
     this.axios = axios.create({
       baseURL: this.constructor.getBaseUrl(),
       timeout: this.constructor.getTimeout(),
-      headers: {
-        'Content-Type': 'application/json',
-        'accept-language': 'it',
-        'x-musement-currency': 'EUR',
-        'x-musement-version': '3.4.0',
-      },
+      headers: this.constructor.getHeaders(),
     });
   }
 

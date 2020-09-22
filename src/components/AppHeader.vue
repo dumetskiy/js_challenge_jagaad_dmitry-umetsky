@@ -15,7 +15,7 @@
         >
           {{ cartItemsFriendlyValue }}
         </div>
-        <wishlist-icon @click="wishlistItemsCount > 0 ? toggleCollectionListView('wishlistedCollection') : null" />
+        <wishlist-icon @click="wishlistItemsCount > 0 ? toggleCollectionListView('wishlistCollection') : null" />
         <span
           v-if="wishlistItemsCount > 0"
           class="bag__item-counter"
@@ -63,7 +63,7 @@ export default {
       return this.$store.getters.collectionItemsCount('cartCollection');
     },
     wishlistItemsCount () {
-      return this.$store.getters.collectionItemsCount('wishlistedCollection');
+      return this.$store.getters.collectionItemsCount('wishlistCollection');
     },
   },
   methods: {
