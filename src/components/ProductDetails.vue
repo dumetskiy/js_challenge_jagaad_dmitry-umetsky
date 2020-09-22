@@ -118,7 +118,7 @@ export default {
       }
 
       let collectionItem = new ProductCollectionItem(
-        this.$props.uuid, this.$props.title, this.$props.priceValue, this.$props.prettyPrice
+        this.$props.uuid, this.$props.title, this.$props.priceValue, this.$props.prettyPrice, this.$props.coverImage
       );
 
       return this.$store.commit('addCollectionItem', {

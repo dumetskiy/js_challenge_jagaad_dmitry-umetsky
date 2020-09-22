@@ -82,18 +82,22 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  position: relative;
 }
 
 .header-bag {
   align-items: flex-end;
   display: flex;
   flex-direction: row;
-  position: relative;
 
   &__item {
     align-items: flex-end;
     display: flex;
     height: 25px;
+
+    &.has-products {
+      cursor: pointer;
+    }
 
     .icon {
       fill: $color-primary-gray;
