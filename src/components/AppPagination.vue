@@ -39,7 +39,7 @@
   </nav>
 </template>
 <script>
-import PaginationConfigGenerator from "../services/Helper/PaginationConfigGenerator";
+import PaginationConfigGenerator from "../services/Pagination/PaginationConfigGenerator";
 import ArrowLeft from '../../static/svg/arrow-left.svg';
 import ArrowRight from '../../static/svg/arrow-right.svg';
 import MusementVenuesApiClient from "../services/API/MusementVenuesApiClient";
