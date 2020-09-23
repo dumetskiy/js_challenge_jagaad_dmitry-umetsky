@@ -10,8 +10,10 @@ const appStore = new Vuex.Store({
     listingItems: [], // Currently listed on the page products data
     resultsCount: 0, // Total results count
     page: 1, // Current page
-    wishlistCollection: new ProductCollection('Wishlist'), // ProductCollection storing wishlist products data
-    cartCollection: new ProductCollection('Cart'), // ProductCollection storing cart products data
+    productCollections: {
+      wishlistCollection: new ProductCollection('Wishlist'), // ProductCollection storing wishlist products data
+      cartCollection: new ProductCollection('Cart'), // ProductCollection storing cart products data
+    },
     collectionList: {
       active: false, // Flag indicating if the collection list view should be displayed
       selectedCollection: null // The name of collection currently listed in collection list view
@@ -23,12 +25,12 @@ const appStore = new Vuex.Store({
         return;
       }
 
-      const collection = state[payload.collectionName];
+      const collection = state.productCollections[payload.collectionName];
 
       collection.items = { ...collection.items, [payload.uuid]: payload.collectionItem };
     },
     removeCollectionItem(state, payload) {
-      Vue.delete(state[payload.collectionName].items, payload.uuid);
+      Vue.delete(state.productCollections[payload.collectionName].items, payload.uuid);
     },
     nextPage(state) {
       state.page++;
@@ -40,7 +42,6 @@ const appStore = new Vuex.Store({
       return Vue.set(state.collectionList, 'active', false);
     },
     toggleListViewCollection(state, collectionName) {
-
       if (state.collectionList.selectedCollection === collectionName) {
         return Vue.set(state.collectionList, 'active', !state.collectionList.active);
       }
@@ -53,15 +54,15 @@ const appStore = new Vuex.Store({
     collectionTotalPrice: (state) => (collectionName) => {
       let totalPrice = 0;
 
-      for (const [uuid, item] of Object.entries(state[collectionName].items)) {
+      for (const [uuid, item] of Object.entries(state.productCollections[collectionName].items)) {
         totalPrice += item.price;
       }
 
       return totalPrice;
     },
-    collectionItemsCount: (state) => (collectionName) => Object.keys(state[collectionName].items).length,
-    productIsInCollection: (state) => (uuid, collectionName) => state[collectionName].items[uuid] instanceof ProductCollectionItem,
-    selectedListViewCollection: (state) => state[state.collectionList.selectedCollection],
+    collectionItemsCount: (state) => (collectionName) => Object.keys(state.productCollections[collectionName].items).length,
+    productIsInCollection: (state) => (uuid, collectionName) => state.productCollections[collectionName].items[uuid] instanceof ProductCollectionItem,
+    selectedListViewCollection: (state) => state.productCollections[state.collectionList.selectedCollection],
     selectedListViewCollectionName: (state) => state.collectionList.selectedCollection,
     isListViewCollectionActive: (state) => state.collectionList.active,
   },

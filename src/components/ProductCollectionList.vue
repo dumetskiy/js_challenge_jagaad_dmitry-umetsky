@@ -18,8 +18,8 @@
       >
         <div class="item-section__preview">
           <img
-            alt="{{ product.title }}"
             class="item-section__preview__image"
+            :alt="product.title"
             :src="product.imageUrl"
           >
         </div>
